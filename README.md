@@ -1,0 +1,2 @@
+# Basic-Html-Structure
+Basic Html Structure refers to the fundamental, standardized layout of an HTML document that organizes content into a logical hierarchy for web browsers to render correctly. It's the skeleton of any webpage, ensuring validity, accessibility, and proper display.
