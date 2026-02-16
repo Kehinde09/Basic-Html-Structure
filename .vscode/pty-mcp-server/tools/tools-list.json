@@ -1,0 +1,362 @@
+[
+  {
+    "name": "proc-spawn",
+    "description": "Spawns an external process using the specified arguments and enables interactive communication via standard input and output. Unlike PTY-based execution, this communicates directly with the process using the runProcess function without allocating a pseudo-terminal. Suitable for non-TUI, stdin/stdout-based interactive programs.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Name of the command to run."
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of arguments for the command."
+        }
+      },
+      "required": [
+        "command"
+      ]
+    }
+  },
+  {
+    "name": "proc-terminate",
+    "description": "Forcefully terminates a running process created via runProcess.",
+    "inputSchema": {"type": "object"}
+  },
+  {
+    "name": "proc-message",
+    "description": "Sends structured text-based instructions or commands to a subprocess started with runProcess. It provides a programmable interface for interacting with the process via standard input.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "df -k"
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  {
+    "name": "proc-cmd",
+    "description": "The proc-cmd tool launches the Windows Command Prompt (cmd.exe) as a subprocess. It allows the AI to interact with the standard Windows shell environment, enabling execution of batch commands, file operations, and system configuration tasks in a familiar terminal interface.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+      },
+      "required": [
+      ]
+    }
+  },
+  {
+    "name": "proc-ps",
+    "description": "proc-ps launches the Windows PowerShell (powershell.exe) as a subprocess. It provides an interactive command-line environment where the AI can execute PowerShell commands, scripts, and system administration tasks. The shell is started with default options to keep it open and ready for further input.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+      },
+      "required": [
+      ]
+    }
+  },
+
+  {
+    "name": "proc-ssh",
+    "description": "proc-ssh launches an SSH client (ssh) as a subprocess using runProcess. It enables the AI to initiate remote connections to other systems via the Secure Shell protocol. The tool can be used to execute remote commands, access remote shells, or tunnel services over SSH. The required arguments field allows specifying the target user, host, and any SSH options (e.g., -p, -i, -L).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments to be passed to the SSH command, such as user, host, and optional flags."
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  {
+    "name": "proc-telnet",
+    "description": "A tool that runs Telnet sessions by internally using PuTTY's plink executable. This enables interactive Telnet connections on Windows without requiring an external pseudo-terminal emulator like winpty. Users supply the Telnet command arguments, which are passed directly to plink to establish the session. (Note: plink.exe must be available in the system PATH.)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Command-line arguments to be passed to plink for establishing the Telnet connection, such as hostname and port."
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  {
+    "name": "proc-plink",
+    "description": "A Windows tool that launches an interactive console application via plink, a command-line SSH and Telnet client. Suitable for executing SSH or Telnet sessions directly without needing an external PTY emulator. (Note: plink.exe must be available in the system PATH.)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Command-line arguments passed to plink. For example, use ['-telnet', 'hostname'] to start a telnet session, or ['-ssh', 'user@hostname'] to start an SSH session."
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  
+  {
+    "name": "socket-open",
+    "description": "This tool initiates a socket connection to the specified host and port.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The hostname or IP address to connect to (e.g., '127.0.0.1' or 'localhost')."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port number to connect to, provided as a string (e.g., '5000')."
+        }
+      },
+      "required": [
+        "host",
+        "port"
+      ]
+    }
+  },
+  {
+    "name": "socket-close",
+    "description": "This tool close active socket connection that was previously established using the 'socket-opne' tool.",
+    "inputSchema": {"type": "object"}
+  },
+  {
+    "name": "socket-read",
+    "description": "Reads the specified number of bytes from the socket. The 'size' parameter indicates how many bytes to read.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "description": "The number of bytes to read from the socket"
+        }
+      },
+      "required": [
+        "size"
+      ]
+    }
+  },
+  {
+    "name": "socket-write",
+    "description": "Write a sequence of bytes to the socket",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "description": "An array of byte values (integers between 0 and 255) to send"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    }
+  },
+  {
+    "name": "socket-message",
+    "description": "This tool sends a message over the active socket connection.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The message content to be sent over the socket connection."
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  {
+    "name": "socket-telnet",
+    "description": "A simple Telnet-like communication tool over raw TCP sockets. This tool connects to a specified host and port, sends and receives data, and removes any Telnet IAC (Interpret As Command) sequences from the communication stream. Note: This is a simplified Telnet implementation and does not support full Telnet protocol features.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The hostname or IP address to connect to (e.g., '127.0.0.1' or 'localhost')."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port number to connect to, provided as a string (e.g., '5000')."
+        }
+      },
+      "required": [
+        "host",
+        "port"
+      ]
+    }
+  },
+
+  {
+    "name": "serial-open",
+    "description": "Opens a serial port connection to a specified device with a given baud rate. Commonly used to access on-premises hardware or network devices via console.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "string",
+          "description": "The path or name of the serial device. On Linux/macOS, use paths like /dev/ttyUSB0; on Windows, use names like COM3."
+        },
+        "speed": {
+          "type": "integer",
+          "description": "Baud rate for communication (e.g., 9600, 115200). Must match the target device's configuration."
+        }
+      },
+      "required": [
+        "device",
+        "speed"
+      ]
+    }
+  },
+  {
+    "name": "serial-close",
+    "description": "This tool close active serial connection that was previously established using the 'serial-open' tool.",
+    "inputSchema": {"type": "object"}
+  },
+  {
+    "name": "serial-read",
+    "description": "Reads the specified number of bytes from the serial. The 'size' parameter indicates how many bytes to read.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "description": "The number of bytes to read from the serial"
+        }
+      },
+      "required": [
+        "size"
+      ]
+    }
+  },
+  {
+    "name": "serial-write",
+    "description": "Write a sequence of bytes to the serial",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "description": "An array of byte values (integers between 0 and 255) to send"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    }
+  },
+  {
+    "name": "serial-message",
+    "description": "This tool sends a specified string to the active socket connection, then waits for a recognizable prompt from the remote side. Upon detecting the prompt, it captures and returns all output received prior to it.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The message content to be sent over the serial connection."
+        }
+      },
+      "required": [
+        "arguments"
+      ]
+    }
+  },
+  {
+    "name": "pms-list-dir",
+    "description": "List the contents of a directory at the specified path.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The filesystem path of the directory whose contents should be listed."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "pms-read-file",
+    "description": "Read the contents of a file at the specified path.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The filesystem path of the file to read."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "pms-write-file",
+    "description": "Write contents to a file at the specified path.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The filesystem path where the file will be written."
+        },
+        "contents": {
+          "type": "string",
+          "description": "The contents to write to the file."
+        }
+      },
+      "required": [
+        "path",
+        "contents"
+      ]
+    }
+  }
+
+]
+

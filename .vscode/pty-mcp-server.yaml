@@ -1,0 +1,51 @@
+logDir : 'c:\Users\ODUKOYA KEHINDE\Desktop\Roadmap.sh\.vscode\pty-mcp-server\logs'
+logLevel : 'Debug'
+toolsDir: 'c:\Users\ODUKOYA KEHINDE\Desktop\Roadmap.sh\.vscode\pty-mcp-server\tools'
+promptsDir: 'c:\Users\ODUKOYA KEHINDE\Desktop\Roadmap.sh\.vscode\pty-mcp-server\prompts'
+resourcesDir: 'c:\Users\ODUKOYA KEHINDE\Desktop\Roadmap.sh\.vscode\pty-mcp-server\resources'
+prompts:
+  - '>>>'
+  - '...'
+  - ']#'
+  - ']$'
+  - ')?'
+  - 'Password:'
+  - 'password:'
+  - 'ghci>'
+  - '--More--'
+  - '(END)'
+invalidChars:
+  - '&&'
+  - '||'
+  - '..'
+invalidCmds:
+  - del
+  - erase
+  - rd
+  - rmdir
+  - format
+  - shutdown
+  - restart
+  - taskkill
+  - rm
+  - dd
+  - chmod
+  - chown
+  - shutdown
+  - reboot
+  - kill
+  
+
+  # not yet implemented parameters.
+environment:
+  ProgramData: "C:\\ProgramData"
+  SystemRoot: "C:\\Windows"
+timeoutMicrosec: 1000000
+serial:
+  device: "COM3"
+  commSpeed: 9600
+  bitsPerWord: 8
+  stopb: 1
+  parity: "NoParity"
+  flowControl: "NoFlowControl"
+  timeout: 1
