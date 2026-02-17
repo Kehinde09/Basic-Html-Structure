@@ -1,2 +1,6 @@
-# Basic-Html-Structure
-Basic Html Structure refers to the fundamental, standardized layout of an HTML document that organizes content into a logical hierarchy for web browsers to render correctly. It's the skeleton of any webpage, ensuring validity, accessibility, and proper display.
+# Single Page CV
+
+This is my solution to the roadmap.sh Single Page CV project.
+
+Project URL:
+https://roadmap.sh/projects/single-page-cv
